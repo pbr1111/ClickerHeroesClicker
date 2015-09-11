@@ -1,5 +1,5 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using ClickerHeroesClicker.Modules;
+using System;
 using System.Threading;
 
 namespace ClickerHeroesClicker
@@ -27,36 +27,81 @@ namespace ClickerHeroesClicker
                 return;
             }
 
-            Thread abilitiesThread = new Thread(() => Abilities.run(hwnd));
-            abilitiesThread.Start();
+            bool[] options = { false, false, false };
+            ShowOptions(options);
 
+            Worker abilitiesThread = new Abilities(hwnd);
+            Worker upgradeHeroesThread = new UpgradeHeroes(hwnd);
+            Worker clickScreenThread = new ClickClickables(hwnd);
+
+            ConsoleKey pressed;
+            while ((pressed = Console.ReadKey(true).Key) != ConsoleKey.Escape)
+            {
+                switch (pressed)
+                {
+                    case ConsoleKey.F1:
+                        options[0] = !options[0];
+
+                        if (options[0])
+                            abilitiesThread.StartOrResume();
+                        else
+                            abilitiesThread.Pause();
+
+                        ShowOptions(options);
+                        break;
+                    case ConsoleKey.F2:
+                        options[1] = !options[1];
+
+                        if (options[1])
+                            upgradeHeroesThread.StartOrResume();
+                        else
+                            upgradeHeroesThread.Pause();
+
+                        ShowOptions(options);
+                        break;
+                    case ConsoleKey.F3:
+                        options[2] = !options[2];
+
+                        if (options[2])
+                            clickScreenThread.StartOrResume();
+                        else
+                            clickScreenThread.Pause();
+
+                        ShowOptions(options);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // ESC pressed --> stop all alive threads
+            abilitiesThread.Stop();
+            upgradeHeroesThread.Stop();
+            clickScreenThread.Stop();
+
+            
             //Scroll
             /*PressMouseLeft(hwnd, Positions.Scroll.X, Positions.Scroll.DownY);
             Thread.Sleep(2000);
-            HoldMouseLeft(hwnd);*/
-
-            while (true)
-            {
-                // Click 2 cops als monstres cada 5s
-                /*SendMouseLeft(Positions.ComboMantainer.X, Positions.ComboMantainer.Y);
-                SendMouseLeft(Positions.ComboMantainer.X, Positions.ComboMantainer.Y);*/
-
-                ClickClickables();
-
-                PressZKey();
-                SendMouseLeft(Positions.UpgradeHeroe.X, Positions.UpgradeHeroe.Y);
-                HoldZKey();
-
-                Thread.Sleep(5000);
-            }
+            ReleaseMouseLeft(hwnd);
+            // Click 2 cops als monstres cada 5s
+            SendMouseLeft(Positions.ComboMantainer.X, Positions.ComboMantainer.Y);
+            SendMouseLeft(Positions.ComboMantainer.X, Positions.ComboMantainer.Y);*/
         }
 
-        private static void ClickClickables()
+        private static void ShowOptions(bool[] options)
         {
-            for(int i = 0; i < Positions.Clickables.Length/2; i++)
-            {
-                SendMouseLeft(Positions.Clickables[i, 0], Positions.Clickables[i, 1]);
-            }
+            Console.Clear();
+            Console.WriteLine("Opcions:");
+            Console.WriteLine("\tF1 - " + GetTextNextStateOption(options[0]) + " utilitzar habilitats.");
+            Console.WriteLine("\tF2 - " + GetTextNextStateOption(options[1]) + " pujar heroi fixe x25.");
+            Console.WriteLine("\tF3 - " + GetTextNextStateOption(options[2]) + " clicar als clicables.");
+            Console.WriteLine("ESC per sortir");
+        }
+
+        private static string GetTextNextStateOption(bool optionState)
+        {
+            return optionState ? "Desactivar" : "Activar";
         }
 
         private static IntPtr GetClickerWindow()
@@ -64,32 +109,16 @@ namespace ClickerHeroesClicker
             return (IntPtr)External.FindWindow(null, "Clicker Heroes");
         }
 
-        private static void SendMouseLeft(int x, int y)
-        {
-            int coordinates = x | (y << 16);
-            External.PostMessage(hwnd, External.WM_LBUTTONDOWN, (IntPtr)0x1, (IntPtr)coordinates);
-            External.PostMessage(hwnd, External.WM_LBUTTONUP, (IntPtr)0x1, (IntPtr)coordinates);
-        }
-
-        private static void PressMouseLeft(int x, int y)
+        /*private static void PressMouseLeft(int x, int y)
         {
             int coordinates = x | (y << 16);
             External.PostMessage(hwnd, External.WM_LBUTTONDOWN, (IntPtr)0x1, (IntPtr)coordinates);
         }
 
-        private static void HoldMouseLeft()
+        private static void ReleaseMouseLeft()
         {
             External.PostMessage(hwnd, External.WM_LBUTTONUP, (IntPtr)0x1, IntPtr.Zero);
-        }
+        }*/
 
-        private static void PressZKey()
-        {
-            External.PostMessage(hwnd, External.WM_KEYDOWN, (IntPtr)External.Z_KEY, (IntPtr)0x2c0001);
-        }
-
-        private static void HoldZKey()
-        {
-            External.PostMessage(hwnd, External.WM_KEYUP, (IntPtr)External.Z_KEY, IntPtr.Zero);
-        }
     }
 }

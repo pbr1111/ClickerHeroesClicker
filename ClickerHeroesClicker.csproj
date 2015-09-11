@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Modules\Abilities.cs" />
     <Compile Include="External.cs" />
+    <Compile Include="Modules\AutoClicker.cs" />
     <Compile Include="Modules\ClickClickables.cs" />
     <Compile Include="Modules\UpgradeHeroes.cs" />
     <Compile Include="Modules\Worker.cs" />

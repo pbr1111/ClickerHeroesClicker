@@ -1,12 +1,12 @@
 ﻿using ClickerHeroesClicker.Modules;
 using System;
-using System.Threading;
 
 namespace ClickerHeroesClicker
 {
     class Program
     {
         static IntPtr hwnd;
+
         static void Main(string[] args)
         {
             hwnd = GetClickerWindow();
@@ -87,7 +87,6 @@ namespace ClickerHeroesClicker
             Environment.Exit(Environment.ExitCode);
         }
 
-
         //Scroll
         /*PressMouseLeft(hwnd, Positions.Scroll.X, Positions.Scroll.DownY);
         Thread.Sleep(2000);
@@ -127,6 +126,5 @@ namespace ClickerHeroesClicker
         {
             External.PostMessage(hwnd, External.WM_LBUTTONUP, (IntPtr)0x1, IntPtr.Zero);
         }*/
-
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClickerHeroesClicker
+namespace ClickerHeroesClicker.StaticMembers
 {
     public static class Positions
     {

@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,20 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScreenCapture.cs" />
     <Compile Include="Modules\Abilities.cs" />
-    <Compile Include="External.cs" />
+    <Compile Include="StaticMembers\External.cs" />
     <Compile Include="Modules\AutoClicker.cs" />
     <Compile Include="Modules\ClickClickables.cs" />
     <Compile Include="Modules\UpgradeHeroes.cs" />
     <Compile Include="Modules\Worker.cs" />
-    <Compile Include="Positions.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="StaticMembers\Positions.cs" />
+    <Compile Include="ClickerMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shared.cs" />
+    <Compile Include="StaticMembers\Shared.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

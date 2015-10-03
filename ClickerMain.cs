@@ -1,9 +1,11 @@
 ﻿using ClickerHeroesClicker.Modules;
+using ClickerHeroesClicker.StaticMembers;
 using System;
+using System.Threading;
 
 namespace ClickerHeroesClicker
 {
-    class Program
+    class ClickerMain
     {
         static IntPtr hwnd;
 
@@ -17,23 +19,37 @@ namespace ClickerHeroesClicker
                 return;
             }
 
-            External.WindowDimension rc;
-            External.GetWindowRect(hwnd, out rc);
+            External.WindowDimension rc = new External.WindowDimension();
+            External.GetClientRect(hwnd, out rc);
 
-            if (rc.top < 0)
+            if (rc.Bottom == 0)
             {
-                Console.WriteLine("El Clicker Heroes no ha d'estar minimitzat. Prem una tecla per continuar.");
+                Console.WriteLine("La finestra no ha d'estar minimitzada. Prem una tecla per continuar.");
                 Console.ReadKey(true);
                 return;
             }
 
-            bool[] options = { false, false, false, false };
-            ShowOptions(options);
+            //IMG 
+            /*ScreenCapture sc = new ScreenCapture(hwnd, rc);
+            while (true)
+            {
+                var clickableId = sc.GetColorsCapture();
+                if(clickableId != -1)
+                {
+                    Shared.SendMouseLeft(hwnd, Positions.Clickables[clickableId, 0], Positions.Clickables[clickableId, 1]);
+                }
+                Thread.Sleep(1000);
+            }
+            return;*/
 
             Worker abilitiesThread = new Abilities(hwnd);
             Worker upgradeHeroesThread = new UpgradeHeroes(hwnd);
             Worker clickScreenThread = new ClickClickables(hwnd);
-            Worker autoClickerThread = new AutoClicker(hwnd);
+            AutoClicker autoClickerThread = new AutoClicker(hwnd);
+
+            bool[] options = { false, false, false, false };
+            int intensity = autoClickerThread.GetMinIntensity();
+            ShowOptions(options, intensity);
 
             ConsoleKey pressed;
             while ((pressed = Console.ReadKey(true).Key) != ConsoleKey.Escape)
@@ -46,7 +62,6 @@ namespace ClickerHeroesClicker
                             abilitiesThread.StartOrResume();
                         else
                             abilitiesThread.Pause();
-                        ShowOptions(options);
                         break;
                     case ConsoleKey.F2:
                         options[1] = !options[1];
@@ -54,7 +69,6 @@ namespace ClickerHeroesClicker
                             upgradeHeroesThread.StartOrResume();
                         else
                             upgradeHeroesThread.Pause();
-                        ShowOptions(options);
                         break;
                     case ConsoleKey.F3:
                         options[2] = !options[2];
@@ -62,7 +76,6 @@ namespace ClickerHeroesClicker
                             clickScreenThread.StartOrResume();
                         else
                             clickScreenThread.Pause();
-                        ShowOptions(options);
                         break;
                     case ConsoleKey.F4:
                         options[3] = !options[3];
@@ -70,11 +83,17 @@ namespace ClickerHeroesClicker
                             autoClickerThread.StartOrResume();
                         else
                             autoClickerThread.Pause();
-                        ShowOptions(options);
+                        break;
+                    case ConsoleKey.UpArrow:
+                        intensity = autoClickerThread.UpIntensity();
+                        break;
+                    case ConsoleKey.DownArrow:
+                        intensity = autoClickerThread.DownIntensity();
                         break;
                     default:
                         break;
                 }
+                ShowOptions(options, intensity);
             }
 
             // ESC pressed --> stop all alive threads
@@ -87,22 +106,14 @@ namespace ClickerHeroesClicker
             Environment.Exit(Environment.ExitCode);
         }
 
-        //Scroll
-        /*PressMouseLeft(hwnd, Positions.Scroll.X, Positions.Scroll.DownY);
-        Thread.Sleep(2000);
-        ReleaseMouseLeft(hwnd);
-        // Click 2 cops als monstres cada 5s
-        SendMouseLeft(Positions.ComboMantainer.X, Positions.ComboMantainer.Y);
-        SendMouseLeft(Positions.ComboMantainer.X, Positions.ComboMantainer.Y);*/
-
-        private static void ShowOptions(bool[] options)
+        private static void ShowOptions(bool[] options, int intensity)
         {
             Console.Clear();
             Console.WriteLine("Opcions:");
             Console.WriteLine("\tF1 - " + GetTextNextStateOption(options[0]) + " utilitzar habilitats.");
             Console.WriteLine("\tF2 - " + GetTextNextStateOption(options[1]) + " pujar heroi fixe x25.");
             Console.WriteLine("\tF3 - " + GetTextNextStateOption(options[2]) + " clicar als clicables.");
-            Console.WriteLine("\tF4 - " + GetTextNextStateOption(options[3]) + " l'autoclicker.");
+            Console.WriteLine("\tF4 - " + GetTextNextStateOption(options[3]) + " l'autoclicker. Nivell: " + intensity + " (amunt/avall).");
             Console.WriteLine("ESC per sortir");
         }
 
@@ -116,15 +127,5 @@ namespace ClickerHeroesClicker
             return (IntPtr)External.FindWindow(null, "Clicker Heroes");
         }
 
-        /*private static void PressMouseLeft(int x, int y)
-        {
-            int coordinates = x | (y << 16);
-            External.PostMessage(hwnd, External.WM_LBUTTONDOWN, (IntPtr)0x1, (IntPtr)coordinates);
-        }
-
-        private static void ReleaseMouseLeft()
-        {
-            External.PostMessage(hwnd, External.WM_LBUTTONUP, (IntPtr)0x1, IntPtr.Zero);
-        }*/
     }
 }

@@ -5,17 +5,17 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClickerHeroesClicker
+namespace ClickerHeroesClicker.StaticMembers
 {
     public static class External
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct WindowDimension
         {
-            public int left;
-            public int top;
-            public int right;
-            public int bottom;
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
         }
 
         public const uint WM_LBUTTONDOWN = 0x201;
@@ -24,12 +24,16 @@ namespace ClickerHeroesClicker
         public const uint WM_KEYUP = 0x0101;
         public const uint FIRST_NUMBER = 0x30;
         public const uint Z_KEY = 0x5A;
+        public const uint PW_CLIENTONLY = 0x1;
 
-        [DllImport("user32.dll", EntryPoint = "PostMessageA", SetLastError = true)]
+        [DllImport("user32.dll")]
         public static extern bool PostMessage(IntPtr hwnd, uint Msg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll")]
         public static extern int FindWindow(string lpClassName, string lpWindowName);
         [DllImport("user32.dll")]
-        public static extern int GetWindowRect(IntPtr hWnd, out WindowDimension lpRect);
+        public static extern bool GetClientRect(IntPtr hWnd, out External.WindowDimension lpRect);
+        [DllImport("user32.dll")]
+        public static extern bool PrintWindow(IntPtr hwnd, IntPtr hDC, uint nFlags);
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClickerHeroesClicker.StaticMembers;
+using System;
 using System.Threading;
 
 namespace ClickerHeroesClicker.Modules

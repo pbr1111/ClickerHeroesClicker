@@ -19,8 +19,8 @@ namespace ClickerHeroesClicker.Shared
 
         public static class ComboMantainer
         {
-            public const int X = 890;
-            public const int Y = 450;
+            public const int X = 1080;
+            public const int Y = 400;
         }
 
         public static class UpgradeHeroe

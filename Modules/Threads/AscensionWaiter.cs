@@ -11,7 +11,7 @@ namespace ClickerHeroesClicker.Modules.Threads
 {
     public class AscensionWaiter : Worker
     {
-        private const int MAX_TOLERANCE = 45;
+        private const int MAX_TOLERANCE = 40;
         private Rectangle bounds;
         private bool found;
 
@@ -34,7 +34,7 @@ namespace ClickerHeroesClicker.Modules.Threads
                 {
                     Methods.SendMouseLeft(_hwnd, Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
                 }
-                Thread.Sleep(5000);
+                Thread.Sleep(20000);
             }
         }
 
@@ -68,25 +68,29 @@ namespace ClickerHeroesClicker.Modules.Threads
                 {
                     found = false;
                 }
-#if DEBUG
+//#if DEBUG
                 if (clickableId != -1)
                 {
                     string logPath = @"C:\Users\Pol\Desktop\clickerlog\";
                     string hourStr = DateTime.Now.ToString("HH_mm_ss");
+                    Color pixel = bmp.GetPixel(Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
                     bmp.SetPixel(Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1], Color.Red);
                     bmp.Save(logPath + @"\img\img_" + hourStr + ".png", ImageFormat.Png);
 
                     using (StreamWriter outputFile = new StreamWriter(logPath + @"\positions.txt", true))
                     {
-                        outputFile.WriteLine("{0} - ClickableId: {1}, X: {2}, Y: {3}, CompareColor: {4}",
+                        outputFile.WriteLine("{0} - ClickableId: {1}, X: {2}, Y: {3}, CompareColor: {4}, Pixel: ({5}, {6}, {7})",
                             hourStr,
                             clickableId,
                             Values.Clickables[clickableId, 0],
                             Values.Clickables[clickableId, 1],
-                            minValue);
+                            minValue,
+                            pixel.R,
+                            pixel.G,
+                            pixel.B);
                     }
                 }
-#endif
+//#endif
             }
             return clickableId;
         }

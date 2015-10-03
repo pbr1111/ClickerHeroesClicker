@@ -19,6 +19,8 @@ namespace ClickerHeroesClicker.Shared
         public const uint WM_KEYDOWN = 0x100;
         public const uint WM_KEYUP = 0x0101;
         public const uint FIRST_NUMBER = 0x30;
+        public const uint VK_CONTROL = 0x11;
+        public const uint Q_KEY = 0x51;
         public const uint Z_KEY = 0x5A;
         public const uint PW_CLIENTONLY = 0x1;
 

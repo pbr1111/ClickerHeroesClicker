@@ -56,7 +56,7 @@ namespace ClickerHeroesClicker.Modules
             Console.Clear();
             Console.WriteLine("Opcions:");
             Console.WriteLine("\tF1 - " + GetTextNextStateOption(options[0]) + " utilitzar habilitats.");
-            Console.WriteLine("\tF2 - " + GetTextNextStateOption(options[1]) + " pujar heroi fixe x25.");
+            Console.WriteLine("\tF2 - " + GetTextNextStateOption(options[1]) + " pujar heroi fixe x100.");
             Console.WriteLine("\tF3 - " + GetTextNextStateOption(options[2]) + " clicar als clicables.");
             Console.WriteLine("\tF4 - " + GetTextNextStateOption(options[3]) + " l'autoclicker. Nivell: " + intensity + " (amunt/avall).");
             Console.WriteLine("\tF5 - " + GetTextNextStateOption(options[4]) + " clicar clicables intel·ligent.");

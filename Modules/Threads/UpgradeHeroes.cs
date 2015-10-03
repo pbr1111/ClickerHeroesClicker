@@ -18,22 +18,12 @@ namespace ClickerHeroesClicker.Modules.Threads
             {
                 wh.WaitOne();
 
-                PressZKey();
+                Methods.PressKey(_hwnd, Win32API.VK_CONTROL);
                 Methods.SendMouseLeft(_hwnd, Values.UpgradeHeroe.X, Values.UpgradeHeroe.Y);
-                ReleaseZKey();
+                Methods.ReleaseKey(_hwnd, Win32API.VK_CONTROL);
 
-                Thread.Sleep(5000);
+                Thread.Sleep(30000);
             }
-        }
-
-        private void PressZKey()
-        {
-            Win32API.PostMessage(_hwnd, Win32API.WM_KEYDOWN, (IntPtr)Win32API.Z_KEY, (IntPtr)0x2c0001);
-        }
-
-        private void ReleaseZKey()
-        {
-            Win32API.PostMessage(_hwnd, Win32API.WM_KEYUP, (IntPtr)Win32API.Z_KEY, IntPtr.Zero);
         }
     }
 }

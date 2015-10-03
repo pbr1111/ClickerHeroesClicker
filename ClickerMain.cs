@@ -1,8 +1,6 @@
 ﻿using ClickerHeroesClicker.Modules;
-using ClickerHeroesClicker.Modules.Threads;
 using ClickerHeroesClicker.Shared;
 using System;
-using System.Threading;
 
 namespace ClickerHeroesClicker
 {

@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace ClickerHeroesClicker.StaticMembers
+namespace ClickerHeroesClicker.Shared
 {
-    public static class Shared
+    public static class Methods
     {
         public static void SendMouseLeft(IntPtr hwnd, int x, int y)
         {
             int coordinates = x | (y << 16);
-            External.PostMessage(hwnd, External.WM_LBUTTONDOWN, (IntPtr)0x1, (IntPtr)coordinates);
-            External.PostMessage(hwnd, External.WM_LBUTTONUP, (IntPtr)0x1, (IntPtr)coordinates);
+            Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONDOWN, (IntPtr)0x1, (IntPtr)coordinates);
+            Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONUP, (IntPtr)0x1, (IntPtr)coordinates);
         }
 
         // Scroll usage

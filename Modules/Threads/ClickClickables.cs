@@ -1,8 +1,8 @@
-﻿using ClickerHeroesClicker.StaticMembers;
+﻿using ClickerHeroesClicker.Shared;
 using System;
 using System.Threading;
 
-namespace ClickerHeroesClicker.Modules
+namespace ClickerHeroesClicker.Modules.Threads
 {
     public class ClickClickables : Worker
     {
@@ -23,12 +23,11 @@ namespace ClickerHeroesClicker.Modules
             }
         }
 
-
         private void ClickClickablePositions()
         {
-            for (int i = 0; i < Positions.Clickables.Length / 2; i++)
+            for (int i = 0; i < Values.Clickables.Length / 2; i++)
             {
-                Shared.SendMouseLeft(_hwnd, Positions.Clickables[i, 0], Positions.Clickables[i, 1]);
+                Methods.SendMouseLeft(_hwnd, Values.Clickables[i, 0], Values.Clickables[i, 1]);
             }
         }
     }

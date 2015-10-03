@@ -1,8 +1,8 @@
-﻿using ClickerHeroesClicker.StaticMembers;
+﻿using ClickerHeroesClicker.Shared;
 using System;
 using System.Threading;
 
-namespace ClickerHeroesClicker.Modules
+namespace ClickerHeroesClicker.Modules.Threads
 {
     public class Abilities : Worker
     {
@@ -106,7 +106,7 @@ namespace ClickerHeroesClicker.Modules
         {
             if (index >= 1 && index <= 9)
             {
-                External.PostMessage(_hwnd, External.WM_KEYDOWN, (IntPtr)(External.FIRST_NUMBER + index), IntPtr.Zero);
+                Win32API.PostMessage(_hwnd, Win32API.WM_KEYDOWN, (IntPtr)(Win32API.FIRST_NUMBER + index), IntPtr.Zero);
                 SetKeyTimeout(index);
             }
         }

@@ -46,17 +46,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ScreenCapture.cs" />
-    <Compile Include="Modules\Abilities.cs" />
-    <Compile Include="StaticMembers\External.cs" />
-    <Compile Include="Modules\AutoClicker.cs" />
-    <Compile Include="Modules\ClickClickables.cs" />
-    <Compile Include="Modules\UpgradeHeroes.cs" />
-    <Compile Include="Modules\Worker.cs" />
-    <Compile Include="StaticMembers\Positions.cs" />
+    <Compile Include="Modules\Menu.cs" />
+    <Compile Include="Modules\Threads\Abilities.cs" />
+    <Compile Include="Modules\Threads\AscensionWaiter.cs" />
+    <Compile Include="Modules\WorkerContainer.cs" />
+    <Compile Include="Shared\Win32API.cs" />
+    <Compile Include="Modules\Threads\AutoClicker.cs" />
+    <Compile Include="Modules\Threads\ClickClickables.cs" />
+    <Compile Include="Modules\Threads\UpgradeHeroes.cs" />
+    <Compile Include="Modules\Threads\Worker.cs" />
+    <Compile Include="Shared\Values.cs" />
     <Compile Include="ClickerMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaticMembers\Shared.cs" />
+    <Compile Include="Shared\Methods.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

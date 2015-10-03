@@ -1,8 +1,8 @@
-﻿using ClickerHeroesClicker.StaticMembers;
+﻿using ClickerHeroesClicker.Shared;
 using System;
 using System.Threading;
 
-namespace ClickerHeroesClicker.Modules
+namespace ClickerHeroesClicker.Modules.Threads
 {
     public class UpgradeHeroes: Worker
     {
@@ -19,7 +19,7 @@ namespace ClickerHeroesClicker.Modules
                 wh.WaitOne();
 
                 PressZKey();
-                Shared.SendMouseLeft(_hwnd, Positions.UpgradeHeroe.X, Positions.UpgradeHeroe.Y);
+                Methods.SendMouseLeft(_hwnd, Values.UpgradeHeroe.X, Values.UpgradeHeroe.Y);
                 ReleaseZKey();
 
                 Thread.Sleep(5000);
@@ -28,12 +28,12 @@ namespace ClickerHeroesClicker.Modules
 
         private void PressZKey()
         {
-            External.PostMessage(_hwnd, External.WM_KEYDOWN, (IntPtr)External.Z_KEY, (IntPtr)0x2c0001);
+            Win32API.PostMessage(_hwnd, Win32API.WM_KEYDOWN, (IntPtr)Win32API.Z_KEY, (IntPtr)0x2c0001);
         }
 
         private void ReleaseZKey()
         {
-            External.PostMessage(_hwnd, External.WM_KEYUP, (IntPtr)External.Z_KEY, IntPtr.Zero);
+            Win32API.PostMessage(_hwnd, Win32API.WM_KEYUP, (IntPtr)Win32API.Z_KEY, IntPtr.Zero);
         }
     }
 }

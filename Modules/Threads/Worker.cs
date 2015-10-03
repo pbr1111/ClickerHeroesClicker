@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace ClickerHeroesClicker.Modules
+namespace ClickerHeroesClicker.Modules.Threads
 {
     public abstract class Worker
     {
@@ -9,7 +9,19 @@ namespace ClickerHeroesClicker.Modules
         protected Thread _thread;
         protected IntPtr _hwnd;
 
-        public void StartOrResume()
+        public void ChangeRunState(bool option)
+        {
+            if (option)
+            {
+                StartOrResume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+
+        private void StartOrResume()
         {
             if (_thread.ThreadState == ThreadState.Unstarted)
             {
@@ -21,7 +33,7 @@ namespace ClickerHeroesClicker.Modules
             }
         }
 
-        public void Pause()
+        private void Pause()
         {
             wh.Reset();
         }

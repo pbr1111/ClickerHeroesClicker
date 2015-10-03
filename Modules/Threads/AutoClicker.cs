@@ -1,8 +1,8 @@
-﻿using ClickerHeroesClicker.StaticMembers;
+﻿using ClickerHeroesClicker.Shared;
 using System;
 using System.Threading;
 
-namespace ClickerHeroesClicker.Modules
+namespace ClickerHeroesClicker.Modules.Threads
 {
     public class AutoClicker : Worker
     {
@@ -26,14 +26,14 @@ namespace ClickerHeroesClicker.Modules
                 switch(Intensity)
                 {
                     case 1:
-                        Shared.SendMouseLeft(_hwnd, Positions.ComboMantainer.X, Positions.ComboMantainer.Y);
+                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Thread.Sleep(150);
                         break;
                     case 2:
-                        Shared.SendMouseLeft(_hwnd, Positions.ComboMantainer.X, Positions.ComboMantainer.Y);
-                        Shared.SendMouseLeft(_hwnd, Positions.ComboMantainer.X, Positions.ComboMantainer.Y);
-                        Shared.SendMouseLeft(_hwnd, Positions.ComboMantainer.X, Positions.ComboMantainer.Y);
-                        Shared.SendMouseLeft(_hwnd, Positions.ComboMantainer.X, Positions.ComboMantainer.Y);
+                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Thread.Sleep(100);
                         break;
                 };

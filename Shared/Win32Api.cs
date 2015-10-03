@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace ClickerHeroesClicker.StaticMembers
+namespace ClickerHeroesClicker.Shared
 {
-    public static class External
+    public static class Win32API
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct WindowDimension
@@ -27,7 +27,7 @@ namespace ClickerHeroesClicker.StaticMembers
         [DllImport("user32.dll")]
         public static extern int FindWindow(string lpClassName, string lpWindowName);
         [DllImport("user32.dll")]
-        public static extern bool GetClientRect(IntPtr hWnd, out External.WindowDimension lpRect);
+        public static extern bool GetClientRect(IntPtr hWnd, out Win32API.WindowDimension lpRect);
         [DllImport("user32.dll")]
         public static extern bool PrintWindow(IntPtr hwnd, IntPtr hDC, uint nFlags);
 

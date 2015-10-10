@@ -6,16 +6,16 @@ namespace ClickerHeroesClicker.Shared
     {
         public static readonly int[,] Clickables =
         {
-            { 515, 460 }, 
-            { 740, 400 }, 
-            { 755, 445 }, 
-            { 750, 350 }, 
-            { 860, 480 }, 
-            { 1000, 425 },
-            { 1040, 410 } 
+            { 523, 451 },
+            { 746, 395 },
+            //{ 755, 445 },
+            { 759, 343 },
+            { 872, 475 },
+            { 1004, 416 },
+            { 1052, 406 }
         };
 
-        public static Color ClickableColor = Color.FromArgb(242, 201, 0);
+        public static Color ClickableColor = Color.FromArgb(234, 76, 10);
 
         public static class ComboMantainer
         {

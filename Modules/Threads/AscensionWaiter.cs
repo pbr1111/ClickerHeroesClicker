@@ -34,7 +34,7 @@ namespace ClickerHeroesClicker.Modules.Threads
                 {
                     Methods.SendMouseLeft(_hwnd, Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
                 }
-                Thread.Sleep(20000);
+                Thread.Sleep(2000);
             }
         }
 
@@ -71,11 +71,15 @@ namespace ClickerHeroesClicker.Modules.Threads
 //#if DEBUG
                 if (clickableId != -1)
                 {
-                    string logPath = @"C:\Users\Pol\Desktop\clickerlog\";
+                    string logPath = @"C:\Users\Pol\Desktop\clickerlog\img_" + DateTime.Now.ToString("yyyy_MM_dd");
+                    if (!Directory.Exists(logPath))
+                    {
+                        Directory.CreateDirectory(logPath);
+                    }
                     string hourStr = DateTime.Now.ToString("HH_mm_ss");
                     Color pixel = bmp.GetPixel(Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
                     bmp.SetPixel(Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1], Color.Red);
-                    bmp.Save(logPath + @"\img\img_" + hourStr + ".png", ImageFormat.Png);
+                    bmp.Save(logPath + @"\img_" + hourStr + ".png", ImageFormat.Png);
 
                     using (StreamWriter outputFile = new StreamWriter(logPath + @"\positions.txt", true))
                     {
@@ -98,16 +102,16 @@ namespace ClickerHeroesClicker.Modules.Threads
         private Bitmap CaptureWindow()
         {
             Bitmap bmp = new Bitmap(this.bounds.Width, this.bounds.Height);
-            using (Graphics gfxBmp = Graphics.FromImage(bmp))
+            using (Graphics g = Graphics.FromImage(bmp))
             {
-                IntPtr hdcBitmap = gfxBmp.GetHdc();
+                IntPtr hdcBitmap = g.GetHdc();
                 try
                 {
                     Win32API.PrintWindow(_hwnd, hdcBitmap, Win32API.PW_CLIENTONLY);
                 }
                 finally
                 {
-                    gfxBmp.ReleaseHdc(hdcBitmap);
+                    g.ReleaseHdc(hdcBitmap);
                 }
             }
             return bmp;
@@ -117,7 +121,7 @@ namespace ClickerHeroesClicker.Modules.Threads
         {
             return Math.Sqrt(
                 Math.Abs(
-                    Math.Pow(a.R - b.R, 2.0) +
+                    Math.Pow(a.R - b.R, 2) +
                     Math.Pow(a.G - b.G, 2) +
                     Math.Pow(a.B - b.B, 2)));
         }

@@ -25,7 +25,7 @@ namespace ClickerHeroesClicker
                 return;
             }
 
-            WorkerContainer.Create(hwnd, rc);
+            WorkerContainer.Create(hwnd, rc.AsRectangle);
             Menu.ShowOptionsWaiter();
             WorkerContainer.Stop();
 
@@ -38,4 +38,5 @@ namespace ClickerHeroesClicker
         }
 
     }
+
 }

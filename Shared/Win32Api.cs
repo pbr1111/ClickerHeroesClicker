@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace ClickerHeroesClicker.Shared
@@ -12,6 +13,14 @@ namespace ClickerHeroesClicker.Shared
             public int Top;
             public int Right;
             public int Bottom;
+
+            public Rectangle AsRectangle
+            {
+                get
+                {
+                    return new Rectangle(Left, Top, Right - Left, Bottom - Top);
+                }
+            }
         }
 
         public const uint WM_LBUTTONDOWN = 0x201;
@@ -32,6 +41,5 @@ namespace ClickerHeroesClicker.Shared
         public static extern bool GetClientRect(IntPtr hWnd, out Win32API.WindowDimension lpRect);
         [DllImport("user32.dll")]
         public static extern bool PrintWindow(IntPtr hwnd, IntPtr hDC, uint nFlags);
-
     }
 }

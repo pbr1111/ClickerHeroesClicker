@@ -1,6 +1,6 @@
 ﻿using ClickerHeroesClicker.Modules.Threads;
-using ClickerHeroesClicker.Shared;
 using System;
+using System.Drawing;
 
 namespace ClickerHeroesClicker.Modules
 {
@@ -14,14 +14,14 @@ namespace ClickerHeroesClicker.Modules
         public static AutoClicker AutoClickerThread;
         public static Worker AscensionWaiterThread;
 
-        public static void Create(IntPtr hwnd, Win32API.WindowDimension rc)
+        public static void Create(IntPtr hwnd, Rectangle rect)
         {
             _hwnd = hwnd;
             AbilitiesThread = new Abilities(hwnd);
             UpgradeHeroesThread = new UpgradeHeroes(hwnd);
             ClickScreenThread = new ClickClickables(hwnd);
             AutoClickerThread = new AutoClicker(hwnd);
-            AscensionWaiterThread = new AscensionWaiter(hwnd, rc);
+            AscensionWaiterThread = new AscensionWaiter(hwnd, rect);
         }
 
         public static void Stop()

@@ -16,11 +16,11 @@ namespace ClickerHeroesClicker.Modules.Threads
         private Rectangle bounds;
         private bool found;
 
-        public AscensionWaiter(IntPtr hwnd, Win32API.WindowDimension rc)
+        public AscensionWaiter(IntPtr hwnd, Rectangle rect)
         {
             _hwnd = hwnd;
             _thread = new Thread(Run);
-            bounds = new Rectangle(rc.Left, rc.Top, rc.Right - rc.Left, rc.Bottom - rc.Top);
+            bounds = rect;
             found = false;
         }
 

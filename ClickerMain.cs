@@ -1,6 +1,7 @@
 ﻿using ClickerHeroesClicker.Modules;
 using ClickerHeroesClicker.Shared;
 using System;
+using System.Drawing;
 
 namespace ClickerHeroesClicker
 {
@@ -16,16 +17,15 @@ namespace ClickerHeroesClicker
                 return;
             }
 
-            Win32API.WindowDimension rc = new Win32API.WindowDimension();
-            Win32API.GetClientRect(hwnd, out rc);
-            if (rc.Bottom == 0)
+            Rectangle windowDimensions = Win32API.GetClientRect(hwnd);
+            if (windowDimensions.Width == 0)
             {
                 Console.WriteLine("La finestra no ha d'estar minimitzada. Prem una tecla per continuar.");
                 Console.ReadKey(true);
                 return;
             }
 
-            WorkerContainer.Create(hwnd, rc.AsRectangle);
+            WorkerContainer.Create(hwnd, windowDimensions);
             Menu.ShowOptionsWaiter();
             WorkerContainer.Stop();
 

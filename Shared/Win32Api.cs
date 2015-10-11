@@ -38,8 +38,15 @@ namespace ClickerHeroesClicker.Shared
         [DllImport("user32.dll")]
         public static extern int FindWindow(string lpClassName, string lpWindowName);
         [DllImport("user32.dll")]
-        public static extern bool GetClientRect(IntPtr hWnd, out Win32API.WindowDimension lpRect);
-        [DllImport("user32.dll")]
         public static extern bool PrintWindow(IntPtr hwnd, IntPtr hDC, uint nFlags);
+        [DllImport("user32.dll")]
+        private static extern bool GetClientRect(IntPtr hWnd, out Win32API.WindowDimension lpRect);
+
+        public static Rectangle GetClientRect(IntPtr hwnd)
+        {
+            Win32API.WindowDimension lpRect;
+            Win32API.GetClientRect(hwnd, out lpRect);
+            return lpRect.AsRectangle;
+        }
     }
 }

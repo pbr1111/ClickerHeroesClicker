@@ -1,9 +1,8 @@
-﻿using ClickerHeroesClicker.Modules.Threads;
-using ClickerHeroesClicker.Modules.Threads.Workers;
+﻿using ClickerHeroesClicker.Modules.Threads.Workers;
 using System;
 using System.Drawing;
 
-namespace ClickerHeroesClicker.Modules
+namespace ClickerHeroesClicker.Modules.Threads
 {
     public static class WorkerContainer
     {

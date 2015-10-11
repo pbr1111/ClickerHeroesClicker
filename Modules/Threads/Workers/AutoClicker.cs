@@ -5,11 +5,8 @@ using System.Threading;
 namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
     public class AutoClicker : Worker
-    {
-        private static int MIN_INTENSITY = 1;
-        private static int MAX_INTENSITY = 2;
-        
-        private int Intensity = MIN_INTENSITY;
+    {    
+        private IntensityLevel Intensity = IntensityLevel.Min;
 
         public AutoClicker(IntPtr hwnd)
         {
@@ -25,41 +22,47 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
                 switch(Intensity)
                 {
-                    case 1:
+                    case IntensityLevel.Min:
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Thread.Sleep(150);
                         break;
-                    case 2:
+                    case IntensityLevel.Max:
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Thread.Sleep(100);
                         break;
-                };
+                }
             }
         }
 
         public int GetMinIntensity()
         {
-            return MIN_INTENSITY;
+            return (int)IntensityLevel.Min;
         }
 
         public int UpIntensity()
         {
-            if(Intensity < MAX_INTENSITY)
+            if(Intensity < IntensityLevel.Max)
             {
                 Intensity++;
             }
-            return Intensity;
+            return (int)Intensity;
         }
         public int DownIntensity()
         {
-            if (Intensity > MIN_INTENSITY)
+            if (Intensity > IntensityLevel.Min)
             {
                 Intensity--;
             }
-            return Intensity;
+            return (int)Intensity;
+        }
+
+        public enum IntensityLevel
+        {
+            Min = 1,
+            Max = 2
         }
 
     }

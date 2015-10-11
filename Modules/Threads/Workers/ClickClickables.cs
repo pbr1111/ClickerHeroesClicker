@@ -18,16 +18,12 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
             {
                 wh.WaitOne();
 
-                ClickClickablePositions();
-                Thread.Sleep(5000);
-            }
-        }
+                for (int i = 0; i < Values.Clickables.Length / 2; i++)
+                {
+                    Methods.SendMouseLeft(_hwnd, Values.Clickables[i, 0], Values.Clickables[i, 1]);
+                }
 
-        private void ClickClickablePositions()
-        {
-            for (int i = 0; i < Values.Clickables.Length / 2; i++)
-            {
-                Methods.SendMouseLeft(_hwnd, Values.Clickables[i, 0], Values.Clickables[i, 1]);
+                Thread.Sleep(5000);
             }
         }
     }

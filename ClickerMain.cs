@@ -9,7 +9,7 @@ namespace ClickerHeroesClicker
     {
         static void Main(string[] args)
         {
-            IntPtr hwnd = GetClickerWindow();
+            IntPtr hwnd = Win32API.FindWindow(null, "Clicker Heroes");
             if (hwnd == null)
             {
                 Console.WriteLine("Error al trobar la finestra de Clicker Heroes. Prem una tecla per continuar.");
@@ -31,12 +31,6 @@ namespace ClickerHeroesClicker
 
             Environment.Exit(Environment.ExitCode);
         }
-
-        private static IntPtr GetClickerWindow()
-        {
-            return (IntPtr)Win32API.FindWindow(null, "Clicker Heroes");
-        }
-
     }
 
 }

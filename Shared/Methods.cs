@@ -7,8 +7,8 @@ namespace ClickerHeroesClicker.Shared
         public static void SendMouseLeft(IntPtr hwnd, int x, int y)
         {
             int coordinates = x | (y << 16);
-            Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONDOWN, (IntPtr)0x1, (IntPtr)coordinates);
-            Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONUP, (IntPtr)0x1, (IntPtr)coordinates);
+            Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONDOWN, IntPtr.Zero, (IntPtr)coordinates);
+            Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONUP, IntPtr.Zero, (IntPtr)coordinates);
         }
 
         public static void PressKey(IntPtr hwnd, uint key)
@@ -22,19 +22,20 @@ namespace ClickerHeroesClicker.Shared
         }
 
         // Scroll usage
-        /*PressMouseLeft(hwnd, Positions.Scroll.X, Positions.Scroll.DownY);
+        /*Methods.PressMouseLeft(hwnd, Values.Scroll.X, Values.Scroll.UpY);
         Thread.Sleep(2000);
-        ReleaseMouseLeft(hwnd);*/
+        Methods.ReleaseMouseLeft(hwnd, Values.Scroll.X, Values.Scroll.UpY);*/
 
-        /*public static void PressMouseLeft(int x, int y)
+        /*public static void PressMouseLeft(IntPtr hwnd, int x, int y)
         {
             int coordinates = x | (y << 16);
-            External.PostMessage(hwnd, External.WM_LBUTTONDOWN, (IntPtr)0x1, (IntPtr)coordinates);
+            Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONDOWN, IntPtr.Zero, (IntPtr)coordinates);
         }
 
-        public static void ReleaseMouseLeft()
+        public static void ReleaseMouseLeft(IntPtr hwnd, int x, int y)
         {
-            External.PostMessage(hwnd, External.WM_LBUTTONUP, (IntPtr)0x1, IntPtr.Zero);
+            int coordinates = x | (y << 16);
+            Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONUP, IntPtr.Zero, (IntPtr)coordinates);
         }*/
     }
 }

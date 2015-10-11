@@ -13,6 +13,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <PublishUrl>publicar\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,13 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modules\Menu.cs" />
-    <Compile Include="Modules\Threads\Abilities.cs" />
-    <Compile Include="Modules\Threads\AscensionWaiter.cs" />
+    <Compile Include="Modules\Threads\Workers\Abilities.cs" />
+    <Compile Include="Modules\Threads\Workers\AscensionWaiter.cs" />
     <Compile Include="Modules\WorkerContainer.cs" />
     <Compile Include="Shared\Win32API.cs" />
-    <Compile Include="Modules\Threads\AutoClicker.cs" />
-    <Compile Include="Modules\Threads\ClickClickables.cs" />
-    <Compile Include="Modules\Threads\UpgradeHeroes.cs" />
+    <Compile Include="Modules\Threads\Workers\AutoClicker.cs" />
+    <Compile Include="Modules\Threads\Workers\ClickClickables.cs" />
+    <Compile Include="Modules\Threads\Workers\UpgradeHeroes.cs" />
     <Compile Include="Modules\Threads\Worker.cs" />
     <Compile Include="Shared\Values.cs" />
     <Compile Include="ClickerMain.cs" />
@@ -65,7 +80,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

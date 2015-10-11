@@ -1,4 +1,5 @@
 ﻿using ClickerHeroesClicker.Modules.Threads;
+using ClickerHeroesClicker.Modules.Threads.Workers;
 using System;
 using System.Drawing;
 

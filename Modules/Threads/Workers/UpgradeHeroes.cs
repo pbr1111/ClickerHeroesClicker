@@ -2,7 +2,7 @@
 using System;
 using System.Threading;
 
-namespace ClickerHeroesClicker.Modules.Threads
+namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
     public class UpgradeHeroes: Worker
     {

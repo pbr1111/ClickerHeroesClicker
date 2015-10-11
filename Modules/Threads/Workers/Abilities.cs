@@ -2,7 +2,7 @@
 using System;
 using System.Threading;
 
-namespace ClickerHeroesClicker.Modules.Threads
+namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
     public class Abilities : Worker
     {
@@ -41,7 +41,7 @@ namespace ClickerHeroesClicker.Modules.Threads
                     if (Abs[i] > 0)
                         Abs[i] -= 10;
                 }
-                Thread.Sleep(10050);
+                Thread.Sleep(10000);
             }
         }
 

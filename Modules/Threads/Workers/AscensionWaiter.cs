@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 
-namespace ClickerHeroesClicker.Modules.Threads
+namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
     public class AscensionWaiter : Worker
     {

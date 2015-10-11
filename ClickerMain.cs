@@ -6,11 +6,9 @@ namespace ClickerHeroesClicker
 {
     class ClickerMain
     {
-        private static IntPtr hwnd;
-
         static void Main(string[] args)
         {
-            hwnd = GetClickerWindow();
+            IntPtr hwnd = GetClickerWindow();
             if (hwnd == null)
             {
                 Console.WriteLine("Error al trobar la finestra de Clicker Heroes. Prem una tecla per continuar.");

@@ -12,6 +12,7 @@ namespace ClickerHeroesClicker.Modules.Threads
     public class AscensionWaiter : Worker
     {
         private const int MAX_TOLERANCE = 40;
+
         private Rectangle bounds;
         private bool found;
 
@@ -101,7 +102,7 @@ namespace ClickerHeroesClicker.Modules.Threads
 
         private Bitmap CaptureWindow()
         {
-            Bitmap bmp = new Bitmap(this.bounds.Width, this.bounds.Height);
+            Bitmap bmp = new Bitmap(bounds.Width, bounds.Height);
             using (Graphics g = Graphics.FromImage(bmp))
             {
                 IntPtr hdcBitmap = g.GetHdc();

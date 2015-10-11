@@ -35,7 +35,7 @@ namespace ClickerHeroesClicker.Modules.Threads
                 {
                     Methods.SendMouseLeft(_hwnd, Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
                 }
-                Thread.Sleep(2000);
+                Thread.Sleep(5000);
             }
         }
 

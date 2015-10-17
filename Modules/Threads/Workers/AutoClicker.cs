@@ -5,12 +5,11 @@ using System.Threading;
 namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
     public class AutoClicker : Worker
-    {    
+    {
         private IntensityLevel Intensity = IntensityLevel.Min;
 
-        public AutoClicker(IntPtr hwnd)
+        public AutoClicker(IntPtr hwnd) : base(hwnd)
         {
-            _hwnd = hwnd;
             _thread = new Thread(Run);
         }
 
@@ -20,7 +19,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
             {
                 wh.WaitOne();
 
-                switch(Intensity)
+                switch (Intensity)
                 {
                     case IntensityLevel.Min:
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
@@ -44,7 +43,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
         public int UpIntensity()
         {
-            if(Intensity < IntensityLevel.Max)
+            if (Intensity < IntensityLevel.Max)
             {
                 Intensity++;
             }

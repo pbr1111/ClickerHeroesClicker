@@ -65,8 +65,9 @@
   <ItemGroup>
     <Compile Include="Modules\Menu.cs" />
     <Compile Include="Modules\Threads\Workers\Abilities.cs" />
-    <Compile Include="Modules\Threads\Workers\AscensionWaiter.cs" />
+    <Compile Include="Modules\Threads\Workers\AutoClickClickables.cs" />
     <Compile Include="Modules\Threads\WorkerContainer.cs" />
+    <Compile Include="Modules\Threads\Workers\BuyAllHeroes.cs" />
     <Compile Include="Shared\Win32API.cs" />
     <Compile Include="Modules\Threads\Workers\AutoClicker.cs" />
     <Compile Include="Modules\Threads\Workers\ClickClickables.cs" />

@@ -4,17 +4,16 @@ using System.Threading;
 
 namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
-    public class UpgradeHeroes: Worker
+    public class UpgradeHeroes : Worker
     {
-        public UpgradeHeroes(IntPtr hwnd)
+        public UpgradeHeroes(IntPtr hwnd) : base(hwnd)
         {
-            _hwnd = hwnd;
             _thread = new Thread(Run);
         }
 
         private void Run()
         {
-            while(true)
+            while (true)
             {
                 wh.WaitOne();
 

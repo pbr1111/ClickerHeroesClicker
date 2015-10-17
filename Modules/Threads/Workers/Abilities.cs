@@ -23,9 +23,8 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
             15 * 60
         };
 
-        public Abilities(IntPtr hwnd)
+        public Abilities(IntPtr hwnd): base(hwnd)
         {
-            _hwnd = hwnd;
             _thread = new Thread(Run);
             backgroundCounterThread = new Thread(BackgroundRun);
             backgroundCounterThread.IsBackground = true;

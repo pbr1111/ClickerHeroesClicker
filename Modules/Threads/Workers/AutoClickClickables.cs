@@ -9,16 +9,15 @@ using System.Threading;
 
 namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
-    public class AscensionWaiter : Worker
+    public class AutoClickClickables : Worker
     {
         private const int MAX_TOLERANCE = 40;
 
         private Rectangle bounds;
         private bool found;
 
-        public AscensionWaiter(IntPtr hwnd, Rectangle rect)
+        public AutoClickClickables(IntPtr hwnd, Rectangle rect) : base(hwnd)
         {
-            _hwnd = hwnd;
             _thread = new Thread(Run);
             bounds = rect;
             found = false;
@@ -69,7 +68,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
                 {
                     found = false;
                 }
-//#if DEBUG
+                //#if DEBUG
                 if (clickableId != -1)
                 {
                     string logPath = @"C:\Users\Pol\Desktop\clickerlog\img_" + DateTime.Now.ToString("yyyy_MM_dd");
@@ -95,7 +94,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
                             pixel.B);
                     }
                 }
-//#endif
+                //#endif
             }
             return clickableId;
         }

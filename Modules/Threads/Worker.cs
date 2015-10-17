@@ -5,19 +5,42 @@ namespace ClickerHeroesClicker.Modules.Threads
 {
     public abstract class Worker
     {
-        protected EventWaitHandle wh = new ManualResetEvent(true);
+        protected EventWaitHandle wh;
         protected Thread _thread;
         protected IntPtr _hwnd;
+        private bool Running;
 
-        public void ChangeRunState(bool option)
+        public Worker(IntPtr hwnd)
+        { 
+            wh = new ManualResetEvent(true);
+            _hwnd = hwnd;
+            Running = false;
+        }
+
+        public bool IsRunning()
         {
-            if (option)
+            return Running;
+        }
+
+        public void ChangeRunState()
+        {
+            if (!Running)
             {
                 StartOrResume();
+                Running = true;
             }
             else
             {
                 Pause();
+                Running = false;
+            }
+        }
+
+        public void Stop()
+        {
+            if (_thread.ThreadState == ThreadState.Running)
+            {
+                _thread.Join();
             }
         }
 
@@ -36,14 +59,6 @@ namespace ClickerHeroesClicker.Modules.Threads
         private void Pause()
         {
             wh.Reset();
-        }
-
-        public void Stop()
-        {
-            if (_thread.ThreadState == ThreadState.Running)
-            {
-                _thread.Join();
-            }
         }
     }
 }

@@ -21,12 +21,7 @@ namespace ClickerHeroesClicker.Shared
             Win32API.PostMessage(hwnd, Win32API.WM_KEYUP, (IntPtr)key, IntPtr.Zero);
         }
 
-        // Scroll usage
-        /*Methods.PressMouseLeft(hwnd, Values.Scroll.X, Values.Scroll.UpY);
-        Thread.Sleep(2000);
-        Methods.ReleaseMouseLeft(hwnd, Values.Scroll.X, Values.Scroll.UpY);*/
-
-        /*public static void PressMouseLeft(IntPtr hwnd, int x, int y)
+        public static void PressMouseLeft(IntPtr hwnd, int x, int y)
         {
             int coordinates = x | (y << 16);
             Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONDOWN, IntPtr.Zero, (IntPtr)coordinates);
@@ -36,6 +31,6 @@ namespace ClickerHeroesClicker.Shared
         {
             int coordinates = x | (y << 16);
             Win32API.PostMessage(hwnd, Win32API.WM_LBUTTONUP, IntPtr.Zero, (IntPtr)coordinates);
-        }*/
+        }
     }
 }

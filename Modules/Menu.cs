@@ -33,9 +33,9 @@ namespace ClickerHeroesClicker.Modules
                     case ConsoleKey.F5:
                         WorkerContainer.AutoClickClickablesThread.ChangeRunState();
                         break;
-                    case ConsoleKey.F6:
+                    /*case ConsoleKey.F6:
                         WorkerContainer.BuyAllHeroes.ChangeRunState();
-                        break;
+                        break;*/
                     case ConsoleKey.UpArrow:
                         intensity = WorkerContainer.AutoClickerThread.UpIntensity();
                         break;
@@ -58,7 +58,7 @@ namespace ClickerHeroesClicker.Modules
             Console.WriteLine("\tF3 - {0} clicar als clicables.", GetTextNextStateOption(WorkerContainer.ClickClickablesThread.IsRunning()));
             Console.WriteLine("\tF4 - {0} l'autoclicker. Nivell: {1} (amunt/avall).", GetTextNextStateOption(WorkerContainer.AutoClickerThread.IsRunning()), intensity);
             Console.WriteLine("\tF5 - {0} clicar clicables intel·ligent.", GetTextNextStateOption(WorkerContainer.AutoClickClickablesThread.IsRunning()));
-            Console.WriteLine("\tF6 - {0} comprar automàticament 200 de cada heroi.", GetTextNextStateOption(WorkerContainer.BuyAllHeroes.IsRunning()));
+            //Console.WriteLine("\tF6 - {0} comprar automàticament 200 de cada heroi.", GetTextNextStateOption(WorkerContainer.BuyAllHeroes.IsRunning()));
             Console.WriteLine("ESC per sortir");
         }
 

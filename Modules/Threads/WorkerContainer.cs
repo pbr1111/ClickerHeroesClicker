@@ -11,7 +11,7 @@ namespace ClickerHeroesClicker.Modules.Threads
         public static Worker ClickClickablesThread;
         public static AutoClicker AutoClickerThread;
         public static Worker AutoClickClickablesThread;
-        public static Worker BuyAllHeroes;
+        public static Worker BuyAllHeroesThread;
 
         public static void Create(IntPtr hwnd, Rectangle rect)
         {
@@ -20,7 +20,7 @@ namespace ClickerHeroesClicker.Modules.Threads
             ClickClickablesThread = new ClickClickables(hwnd);
             AutoClickerThread = new AutoClicker(hwnd);
             AutoClickClickablesThread = new AutoClickClickables(hwnd, rect);
-            BuyAllHeroes = new BuyAllHeroes(hwnd);
+            //BuyAllHeroesThread = new BuyAllHeroes(hwnd, rect);
         }
 
         public static void Stop()
@@ -30,6 +30,7 @@ namespace ClickerHeroesClicker.Modules.Threads
             ClickClickablesThread.Stop();
             AutoClickerThread.Stop();
             AutoClickClickablesThread.Stop();
+            //BuyAllHeroesThread.Stop();
         }
     }
 }

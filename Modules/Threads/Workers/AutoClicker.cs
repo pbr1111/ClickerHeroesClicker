@@ -6,11 +6,12 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
     public class AutoClicker : Worker
     {
-        private IntensityLevel Intensity = IntensityLevel.Min;
+        private IntensityLevel Intensity;
 
         public AutoClicker(IntPtr hwnd) : base(hwnd)
         {
             _thread = new Thread(Run);
+            Intensity = IntensityLevel.Minimum;
         }
 
         private void Run()
@@ -21,11 +22,11 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
                 switch (Intensity)
                 {
-                    case IntensityLevel.Min:
+                    case IntensityLevel.Minimum:
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Thread.Sleep(150);
                         break;
-                    case IntensityLevel.Max:
+                    case IntensityLevel.Maximum:
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                         Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
@@ -38,12 +39,12 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
         public int GetMinIntensity()
         {
-            return (int)IntensityLevel.Min;
+            return (int)IntensityLevel.Minimum;
         }
 
         public int UpIntensity()
         {
-            if (Intensity < IntensityLevel.Max)
+            if (Intensity < IntensityLevel.Maximum)
             {
                 Intensity++;
             }
@@ -51,7 +52,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
         }
         public int DownIntensity()
         {
-            if (Intensity > IntensityLevel.Min)
+            if (Intensity > IntensityLevel.Minimum)
             {
                 Intensity--;
             }
@@ -60,8 +61,8 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
         public enum IntensityLevel
         {
-            Min = 1,
-            Max = 2
+            Minimum = 1,
+            Maximum = 2,
         }
 
     }

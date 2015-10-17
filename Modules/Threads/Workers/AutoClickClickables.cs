@@ -11,7 +11,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
     public class AutoClickClickables : Worker
     {
-        private const int MAX_TOLERANCE = 40;
+        private const int MaxTolerance = 40;
 
         private Rectangle bounds;
         private bool found;
@@ -41,18 +41,18 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
         public int IsClickableVisible()
         {
             int clickableId = -1;
-            using (Bitmap bmp = CaptureWindow())
+            using (Bitmap bmp = WindowImageMethods.CaptureWindow(_hwnd, bounds))
             {
                 List<double> colorComparison = new List<double>();
                 for (int i = 0; i < Values.Clickables.Length / 2; i++)
                 {
                     colorComparison.Add(
-                        CompareColors(
+                        WindowImageMethods.CompareColors(
                             bmp.GetPixel(Values.Clickables[i, 0], Values.Clickables[i, 1]),
                             Values.ClickableColor));
                 }
                 double minValue = colorComparison.Min();
-                if (minValue < MAX_TOLERANCE)
+                if (minValue < MaxTolerance)
                 {
                     if (!found)
                     {
@@ -97,33 +97,6 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
                 //#endif
             }
             return clickableId;
-        }
-
-        private Bitmap CaptureWindow()
-        {
-            Bitmap bmp = new Bitmap(bounds.Width, bounds.Height);
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                IntPtr hdcBitmap = g.GetHdc();
-                try
-                {
-                    Win32API.PrintWindow(_hwnd, hdcBitmap, Win32API.PW_CLIENTONLY);
-                }
-                finally
-                {
-                    g.ReleaseHdc(hdcBitmap);
-                }
-            }
-            return bmp;
-        }
-
-        private double CompareColors(Color a, Color b)
-        {
-            return Math.Sqrt(
-                Math.Abs(
-                    Math.Pow(a.R - b.R, 2) +
-                    Math.Pow(a.G - b.G, 2) +
-                    Math.Pow(a.B - b.B, 2)));
         }
     }
 }

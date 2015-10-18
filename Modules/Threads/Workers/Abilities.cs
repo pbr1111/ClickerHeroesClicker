@@ -6,9 +6,9 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
     public class Abilities : Worker
     {
-        private Thread backgroundCounterThread;
+        private Timer backgroundCounterTimer;
 
-        private int[] Abs = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        private volatile int[] Abs = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         private readonly int[] Timeouts =
         {
@@ -23,64 +23,51 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
             15 * 60
         };
 
-        public Abilities(IntPtr hwnd): base(hwnd)
+        public Abilities(IntPtr hwnd) : base(hwnd, 10050)
         {
-            _thread = new Thread(Run);
-            backgroundCounterThread = new Thread(BackgroundRun);
-            backgroundCounterThread.IsBackground = true;
-            backgroundCounterThread.Start();
+            backgroundCounterTimer = new Timer(new TimerCallback(BackgroundRun), null, 0, 1000);
         }
 
-        private void BackgroundRun()
+        private void BackgroundRun(object obj)
         {
-            while (true)
+            for (int i = 0; i < Abs.Length; i++)
             {
-                for (int i = 0; i < Abs.Length; i++)
-                {
-                    if (Abs[i] > 0)
-                        Abs[i] -= 10;
-                }
-                Thread.Sleep(10000);
+                if (Abs[i] > 0)
+                    Abs[i] -= 1;
             }
         }
 
-        private void Run()
+        protected override void Run(object args)
         {
-            while (true)
+            if (IsKeyReady(6) /*120*/)
             {
-                wh.WaitOne();
+                SendKey(6);
+            }
 
-                if (IsKeyReady(6) /*120*/)
-                {
-                    SendKey(6);
-                }
+            if (IsKeyReady(8) /*15*/ && IsKeyReady(3) /*7.30*/ && IsKeyReady(1) /*2.30*/)
+            {
+                SendKey(7); //15
+                SendKey(5); //15
+                SendKey(8); //15
 
-                if (IsKeyReady(8) /*15*/ && IsKeyReady(3) /*7.30*/ && IsKeyReady(1) /*2.30*/)
-                {
-                    SendKey(7); //15
-                    SendKey(5); //15
-                    SendKey(8); //15
+                SendKey(3); //7.30
+                SendKey(4); //7.30
 
-                    SendKey(3); //7.30
-                    SendKey(4); //7.30
+                SendKey(1); //2.30
+                SendKey(2); //2.30
+            }
+            else if (IsKeyReady(3) /*7.30*/ && IsKeyReady(1))
+            {
+                SendKey(3); //7.30
+                SendKey(4); //7.30
 
-                    SendKey(1); //2.30
-                    SendKey(2); //2.30
-                }
-                else if (IsKeyReady(3) /*7.30*/ && IsKeyReady(1))
-                {
-                    SendKey(3); //7.30
-                    SendKey(4); //7.30
-
-                    SendKey(1); //2.30
-                    SendKey(2); //2.30
-                }
-                else if (IsKeyReady(1))
-                {
-                    SendKey(1); //2.30
-                    SendKey(2); //2.30
-                }
-                Thread.Sleep(10050);
+                SendKey(1); //2.30
+                SendKey(2); //2.30
+            }
+            else if (IsKeyReady(1))
+            {
+                SendKey(1); //2.30
+                SendKey(2); //2.30
             }
         }
 
@@ -93,20 +80,12 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
             return false;
         }
 
-        private void SetKeyTimeout(int index)
-        {
-            if (index >= 1 && index <= 9 && Abs[index] <= 0)
-            {
-                Abs[index] = Timeouts[index];
-            }
-        }
-
         private void SendKey(int index)
         {
             if (index >= 1 && index <= 9)
             {
                 Win32API.PostMessage(_hwnd, Win32API.WM_KEYDOWN, (IntPtr)(Win32API.FIRST_NUMBER + index), IntPtr.Zero);
-                SetKeyTimeout(index);
+                Abs[index] = Timeouts[index];
             }
         }
     }

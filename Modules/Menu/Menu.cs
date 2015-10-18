@@ -1,7 +1,7 @@
 ﻿using ClickerHeroesClicker.Modules.Threads;
 using System;
 
-namespace ClickerHeroesClicker.Modules
+namespace ClickerHeroesClicker.Modules.Menu
 {
     public static class Menu
     {

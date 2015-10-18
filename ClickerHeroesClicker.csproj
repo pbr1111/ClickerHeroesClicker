@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Modules\Menu.cs" />
+    <Compile Include="Modules\Menu\Menu.cs" />
     <Compile Include="Modules\Threads\Workers\Abilities.cs" />
     <Compile Include="Modules\Threads\Workers\AutoClickClickables.cs" />
     <Compile Include="Modules\Threads\WorkerContainer.cs" />

@@ -6,23 +6,16 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 {
     public class UpgradeHeroes : Worker
     {
-        public UpgradeHeroes(IntPtr hwnd) : base(hwnd)
+        public UpgradeHeroes(IntPtr hwnd) : base(hwnd, 30000)
         {
-            _thread = new Thread(Run);
+
         }
 
-        private void Run()
+        protected override void Run(object args)
         {
-            while (true)
-            {
-                wh.WaitOne();
-
-                Methods.PressKey(_hwnd, Win32API.VK_CONTROL);
-                Methods.SendMouseLeft(_hwnd, Values.UpgradeHeroe.X, Values.UpgradeHeroe.Y);
-                Methods.ReleaseKey(_hwnd, Win32API.VK_CONTROL);
-
-                Thread.Sleep(30000);
-            }
+            Methods.PressKey(_hwnd, Win32API.VK_CONTROL);
+            Methods.SendMouseLeft(_hwnd, Values.UpgradeHeroe.X, Values.UpgradeHeroe.Y);
+            Methods.ReleaseKey(_hwnd, Win32API.VK_CONTROL);
         }
     }
 }

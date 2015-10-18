@@ -10,38 +10,30 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
         private const int MaxTolerance = 40;
         private Rectangle bounds;
 
-        public BuyAllHeroes(IntPtr hwnd, Rectangle rect) : base(hwnd)
+        public BuyAllHeroes(IntPtr hwnd, Rectangle rect) : base(hwnd, 10000)
         {
-            _thread = new Thread(Run);
             bounds = rect;
         }
 
-        private void Run()
+        protected override void Run(object args)
         {
+            //GoToFirstHeroe();
+
+            /*Methods.PressMouseLeft(_hwnd, Values.Scroll.X, Values.Scroll.DownY);
             while (true)
             {
-                wh.WaitOne();
-
-                //GoToFirstHeroe();
-
-                /*Methods.PressMouseLeft(_hwnd, Values.Scroll.X, Values.Scroll.DownY);
-                while (true)
+                using (Bitmap bmp = WindowImageMethods.CaptureWindow(_hwnd, bounds))
                 {
-                    using (Bitmap bmp = WindowImageMethods.CaptureWindow(_hwnd, bounds))
+                    if (WindowImageMethods.CompareColors(bmp.GetPixel(548, 611), Color.FromArgb(212, 177, 79)) < MaxTolerance)
                     {
-                        if (WindowImageMethods.CompareColors(bmp.GetPixel(548, 611), Color.FromArgb(212, 177, 79)) < MaxTolerance)
-                        {
-                            Methods.ReleaseMouseLeft(_hwnd, Values.Scroll.X, Values.Scroll.DownY);
-                            break;
-                        }
+                        Methods.ReleaseMouseLeft(_hwnd, Values.Scroll.X, Values.Scroll.DownY);
+                        break;
                     }
-                    Thread.Sleep(1000);
-                }*/
-
-                //Methods.ReleaseMouseLeft(_hwnd, Values.Scroll.X, Values.Scroll.DownY);
-
+                }
                 Thread.Sleep(1000);
-            }
+            }*/
+
+            //Methods.ReleaseMouseLeft(_hwnd, Values.Scroll.X, Values.Scroll.DownY);
         }
 
         private void GoToFirstHeroe()

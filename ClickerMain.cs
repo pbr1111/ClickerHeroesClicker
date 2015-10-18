@@ -1,4 +1,4 @@
-﻿using ClickerHeroesClicker.Modules;
+﻿using ClickerHeroesClicker.Modules.Menu;
 using ClickerHeroesClicker.Modules.Threads;
 using ClickerHeroesClicker.Shared;
 using System;
@@ -33,5 +33,4 @@ namespace ClickerHeroesClicker
             Environment.Exit(Environment.ExitCode);
         }
     }
-
 }

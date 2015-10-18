@@ -5,17 +5,20 @@ namespace ClickerHeroesClicker.Modules.Threads
 {
     public abstract class Worker
     {
-        protected EventWaitHandle wh;
-        protected Thread _thread;
+        protected Timer Timer;
+        protected int PeriodTime;
         protected IntPtr _hwnd;
         private bool Running;
 
-        public Worker(IntPtr hwnd)
+        public Worker(IntPtr hwnd, int periodTime)
         { 
-            wh = new ManualResetEvent(true);
             _hwnd = hwnd;
+            Timer = new Timer(new TimerCallback(Run));
+            PeriodTime = periodTime;
             Running = false;
         }
+
+        protected abstract void Run(object args);
 
         public bool IsRunning()
         {
@@ -38,27 +41,17 @@ namespace ClickerHeroesClicker.Modules.Threads
 
         public void Stop()
         {
-            if (_thread.ThreadState == ThreadState.Running)
-            {
-                _thread.Join();
-            }
+            Timer.Dispose();
         }
 
         private void StartOrResume()
         {
-            if (_thread.ThreadState == ThreadState.Unstarted)
-            {
-                _thread.Start();
-            }
-            else
-            {
-                wh.Set();
-            }
+            Timer.Change(0, PeriodTime);
         }
 
         private void Pause()
         {
-            wh.Reset();
+            Timer.Change(Timeout.Infinite, Timeout.Infinite);
         }
     }
 }

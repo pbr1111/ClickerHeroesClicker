@@ -16,25 +16,18 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
         private Rectangle bounds;
         private bool found;
 
-        public AutoClickClickables(IntPtr hwnd, Rectangle rect) : base(hwnd)
+        public AutoClickClickables(IntPtr hwnd, Rectangle rect) : base(hwnd, 5000)
         {
-            _thread = new Thread(Run);
             bounds = rect;
             found = false;
         }
 
-        private void Run()
+        protected override void Run(object args)
         {
             int clickableId = -1;
-            while (true)
+            if ((clickableId = IsClickableVisible()) != -1)
             {
-                wh.WaitOne();
-
-                if ((clickableId = IsClickableVisible()) != -1)
-                {
-                    Methods.SendMouseLeft(_hwnd, Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
-                }
-                Thread.Sleep(5000);
+                Methods.SendMouseLeft(_hwnd, Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
             }
         }
 

@@ -8,32 +8,24 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
     {
         private IntensityLevel Intensity;
 
-        public AutoClicker(IntPtr hwnd) : base(hwnd)
+        public AutoClicker(IntPtr hwnd) : base(hwnd, 100)
         {
-            _thread = new Thread(Run);
             Intensity = IntensityLevel.Minimum;
         }
 
-        private void Run()
+        protected override void Run(object args)
         {
-            while (true)
+            switch (Intensity)
             {
-                wh.WaitOne();
-
-                switch (Intensity)
-                {
-                    case IntensityLevel.Minimum:
-                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                        Thread.Sleep(150);
-                        break;
-                    case IntensityLevel.Maximum:
-                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                        Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                        Thread.Sleep(100);
-                        break;
-                }
+                case IntensityLevel.Minimum:
+                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    break;
+                case IntensityLevel.Maximum:
+                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    break;
             }
         }
 

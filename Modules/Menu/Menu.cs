@@ -5,13 +5,13 @@ namespace ClickerHeroesClicker.Modules.Menu
 {
     public static class Menu
     {
-        private static int intensity;
+        private static int Intensity;
 
         public static void ShowOptionsWaiter()
         {
-            intensity = WorkerContainer.AutoClickerThread.GetMinIntensity();
+            Intensity = WorkerContainer.AutoClickerThread.GetMinIntensity();
 
-            ShowOptions(intensity);
+            ShowOptions(Intensity);
 
             ConsoleKey pressed;
             while ((pressed = Console.ReadKey(true).Key) != ConsoleKey.Escape)
@@ -37,15 +37,15 @@ namespace ClickerHeroesClicker.Modules.Menu
                         WorkerContainer.BuyAllHeroes.ChangeRunState();
                         break;*/
                     case ConsoleKey.UpArrow:
-                        intensity = WorkerContainer.AutoClickerThread.UpIntensity();
+                        Intensity = WorkerContainer.AutoClickerThread.UpIntensity();
                         break;
                     case ConsoleKey.DownArrow:
-                        intensity = WorkerContainer.AutoClickerThread.DownIntensity();
+                        Intensity = WorkerContainer.AutoClickerThread.DownIntensity();
                         break;
                     default:
                         break;
                 }
-                ShowOptions(intensity);
+                ShowOptions(Intensity);
             }
         }
 

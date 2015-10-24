@@ -11,7 +11,7 @@ namespace ClickerHeroesClicker.Modules.Threads
         public static Worker ClickClickablesThread;
         public static AutoClicker AutoClickerThread;
         public static Worker AutoClickClickablesThread;
-        public static Worker BuyAllHeroesThread;
+        //public static Worker BuyAllHeroesThread;
 
         public static void Create(IntPtr hwnd, Rectangle rect)
         {

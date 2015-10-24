@@ -8,7 +8,6 @@ namespace ClickerHeroesClicker.Shared
         {
             { 523, 451 },
             { 746, 395 },
-            //{ 755, 445 },
             { 759, 343 },
             { 872, 475 },
             { 1004, 416 },
@@ -35,5 +34,18 @@ namespace ClickerHeroesClicker.Shared
             public const int DownY = 623;
             public const int UpY = 189;
         }
+
+        public static readonly int[] AbilitiesTimeouts =
+        {
+            2 * 60 + 30,
+            2 * 60 + 30,
+            7 * 60 + 30,
+            7 * 60 + 30,
+            15 * 60,
+            2 * 60 * 60,
+            15 * 60,
+            15 * 60,
+            15 * 60
+        };
     }
 }

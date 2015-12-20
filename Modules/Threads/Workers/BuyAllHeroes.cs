@@ -38,14 +38,14 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
         private void GoToFirstHeroe()
         {
-            Methods.PressMouseLeft(_hwnd, Values.Scroll.X, Values.Scroll.UpY);
+            Methods.PressMouseLeft(Hwnd, Values.Scroll.X, Values.Scroll.UpY);
             while (true)
             {
-                using (Bitmap bmp = WindowImageMethods.CaptureWindow(_hwnd, bounds))
+                using (Bitmap bmp = WindowImageMethods.CaptureWindow(Hwnd, bounds))
                 {
                     if (WindowImageMethods.CompareColors(bmp.GetPixel(548, 201), Color.FromArgb(212, 149, 27)) < MaxTolerance)
                     {
-                        Methods.ReleaseMouseLeft(_hwnd, Values.Scroll.X, Values.Scroll.UpY);
+                        Methods.ReleaseMouseLeft(Hwnd, Values.Scroll.X, Values.Scroll.UpY);
                         break;
                     }
                 }

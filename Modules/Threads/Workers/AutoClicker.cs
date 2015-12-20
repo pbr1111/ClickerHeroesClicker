@@ -17,13 +17,13 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
             switch (Intensity)
             {
                 case IntensityLevel.Minimum:
-                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                     break;
                 case IntensityLevel.Maximum:
-                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                    Methods.SendMouseLeft(_hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                     break;
             }
         }

@@ -7,12 +7,12 @@ namespace ClickerHeroesClicker.Modules.Threads
     {
         protected Timer Timer;
         protected int PeriodTime;
-        protected IntPtr _hwnd;
+        protected IntPtr Hwnd;
         private bool Running;
 
         public Worker(IntPtr hwnd, int periodTime)
-        { 
-            _hwnd = hwnd;
+        {
+            Hwnd = hwnd;
             Timer = new Timer(new TimerCallback(Run));
             PeriodTime = periodTime;
             Running = false;
@@ -29,13 +29,13 @@ namespace ClickerHeroesClicker.Modules.Threads
         {
             if (!Running)
             {
-                StartOrResume();
-                Running = true;
+                if (StartOrResume())
+                    Running = true;
             }
             else
             {
-                Pause();
-                Running = false;
+                if (Pause())
+                    Running = false;
             }
         }
 
@@ -44,14 +44,14 @@ namespace ClickerHeroesClicker.Modules.Threads
             Timer.Dispose();
         }
 
-        private void StartOrResume()
+        protected virtual bool StartOrResume()
         {
-            Timer.Change(0, PeriodTime);
+            return Timer.Change(0, PeriodTime);
         }
 
-        private void Pause()
+        protected virtual bool Pause()
         {
-            Timer.Change(Timeout.Infinite, Timeout.Infinite);
+            return Timer.Change(Timeout.Infinite, Timeout.Infinite);
         }
     }
 }

@@ -18,15 +18,7 @@ namespace ClickerHeroesClicker
                 return;
             }
 
-            Rectangle windowDimensions = Win32API.GetClientRect(hwnd);
-            if (windowDimensions.Width == 0)
-            {
-                Console.WriteLine("La finestra no ha d'estar minimitzada. Prem una tecla per continuar.");
-                Console.ReadKey(true);
-                return;
-            }
-
-            WorkerContainer.Create(hwnd, windowDimensions);
+            WorkerContainer.Create(hwnd);
             Menu.ShowOptionsWaiter();
             WorkerContainer.Stop();
 

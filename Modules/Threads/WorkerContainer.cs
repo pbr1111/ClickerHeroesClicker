@@ -13,13 +13,13 @@ namespace ClickerHeroesClicker.Modules.Threads
         public static Worker AutoClickClickablesThread;
         //public static Worker BuyAllHeroesThread;
 
-        public static void Create(IntPtr hwnd, Rectangle rect)
+        public static void Create(IntPtr hwnd)
         {
             AbilitiesThread = new Abilities(hwnd);
             UpgradeHeroesThread = new UpgradeHeroes(hwnd);
             ClickClickablesThread = new ClickClickables(hwnd);
             AutoClickerThread = new AutoClicker(hwnd);
-            AutoClickClickablesThread = new AutoClickClickables(hwnd, rect);
+            AutoClickClickablesThread = new AutoClickClickables(hwnd);
             //BuyAllHeroesThread = new BuyAllHeroes(hwnd, rect);
         }
 

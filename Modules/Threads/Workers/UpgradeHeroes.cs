@@ -12,9 +12,9 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
         protected override void Run(object args)
         {
-            Methods.PressKey(_hwnd, Win32API.VK_CONTROL);
-            Methods.SendMouseLeft(_hwnd, Values.UpgradeHeroe.X, Values.UpgradeHeroe.Y);
-            Methods.ReleaseKey(_hwnd, Win32API.VK_CONTROL);
+            Methods.PressKey(Hwnd, Win32API.VK_CONTROL);
+            Methods.SendMouseLeft(Hwnd, Values.UpgradeHeroe.X, Values.UpgradeHeroe.Y);
+            Methods.ReleaseKey(Hwnd, Win32API.VK_CONTROL);
         }
     }
 }

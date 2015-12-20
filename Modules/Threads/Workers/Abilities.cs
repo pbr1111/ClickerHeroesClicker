@@ -73,7 +73,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
         {
             if (index >= 1 && index <= 9)
             {
-                Win32API.PostMessage(_hwnd, Win32API.WM_KEYDOWN, (IntPtr)(Win32API.FIRST_NUMBER + index), IntPtr.Zero);
+                Win32API.PostMessage(Hwnd, Win32API.WM_KEYDOWN, (IntPtr)(Win32API.FIRST_NUMBER + index), IntPtr.Zero);
                 SetCooldown(index);
             }
         }

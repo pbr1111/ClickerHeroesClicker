@@ -13,13 +13,25 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
     {
         private const int MaxTolerance = 40;
 
-        private Rectangle bounds;
-        private bool found;
+        private Rectangle Bounds;
+        private bool Found;
 
-        public AutoClickClickables(IntPtr hwnd, Rectangle rect) : base(hwnd, 5000)
+        public AutoClickClickables(IntPtr hwnd) : base(hwnd, 5000)
         {
-            bounds = rect;
-            found = false;
+            Found = false;
+        }
+
+        protected override bool StartOrResume()
+        {
+            Rectangle windowDimensions = Win32API.GetClientRect(Hwnd);
+            if (windowDimensions.Width == 0)
+            {
+                Console.WriteLine("La finestra no ha d'estar minimitzada. Prem una tecla per continuar.");
+                Console.ReadKey(true);
+                return false;
+            }
+            Bounds = windowDimensions;
+            return base.StartOrResume();
         }
 
         protected override void Run(object args)
@@ -27,14 +39,14 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
             int clickableId = -1;
             if ((clickableId = IsClickableVisible()) != -1)
             {
-                Methods.SendMouseLeft(_hwnd, Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
+                Methods.SendMouseLeft(Hwnd, Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
             }
         }
 
         public int IsClickableVisible()
         {
             int clickableId = -1;
-            using (Bitmap bmp = WindowImageMethods.CaptureWindow(_hwnd, bounds))
+            using (Bitmap bmp = WindowImageMethods.CaptureWindow(Hwnd, Bounds))
             {
                 List<double> colorComparison = new List<double>();
                 for (int i = 0; i < Values.Clickables.Length / 2; i++)
@@ -47,21 +59,21 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
                 double minValue = colorComparison.Min();
                 if (minValue < MaxTolerance)
                 {
-                    if (!found)
+                    if (!Found)
                     {
-                        found = true;
+                        Found = true;
                     }
                     else
                     {
                         clickableId = colorComparison.IndexOf(minValue);
-                        found = false;
+                        Found = false;
                     }
                 }
-                else if (found)
+                else if (Found)
                 {
-                    found = false;
+                    Found = false;
                 }
-                //#if DEBUG
+#if DEBUG
                 if (clickableId != -1)
                 {
                     string logPath = @"C:\Users\Pol\Desktop\clickerlog\img_" + DateTime.Now.ToString("yyyy_MM_dd");
@@ -87,7 +99,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
                             pixel.B);
                     }
                 }
-                //#endif
+#endif
             }
             return clickableId;
         }

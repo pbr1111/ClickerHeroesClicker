@@ -83,7 +83,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
             AbilitiesCooldown[index-1] = Values.AbilitiesTimeouts[index-1];
             if (index == 9 && LastAbilityUsed != -1)
             {
-                AbilitiesCooldown[LastAbilityUsed-1] -= 60*60;
+                AbilitiesCooldown[LastAbilityUsed-1] -= Values.CooldownReduction;
             }
             else
             {

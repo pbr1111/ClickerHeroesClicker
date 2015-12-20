@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Threading;
 
 namespace ClickerHeroesClicker.Modules.Threads.Workers
 {

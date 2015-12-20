@@ -1,6 +1,5 @@
 ﻿using ClickerHeroesClicker.Modules.Threads.Workers;
 using System;
-using System.Drawing;
 
 namespace ClickerHeroesClicker.Modules.Threads
 {

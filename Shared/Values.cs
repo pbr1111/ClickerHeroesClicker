@@ -47,5 +47,7 @@ namespace ClickerHeroesClicker.Shared
             15 * 60,
             15 * 60
         };
+
+        public const int CooldownReduction = 60 * 60;
     }
 }

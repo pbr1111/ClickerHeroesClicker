@@ -2,7 +2,6 @@
 using ClickerHeroesClicker.Modules.Threads;
 using ClickerHeroesClicker.Shared;
 using System;
-using System.Drawing;
 
 namespace ClickerHeroesClicker
 {

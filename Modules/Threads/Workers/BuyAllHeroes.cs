@@ -8,11 +8,11 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
     public class BuyAllHeroes : Worker
     {
         private const int MaxTolerance = 40;
-        private Rectangle bounds;
+        private Rectangle Bounds;
 
-        public BuyAllHeroes(IntPtr hwnd, Rectangle rect) : base(hwnd, 10000)
+        public BuyAllHeroes(IntPtr hwnd) : base(hwnd, 10000)
         {
-            bounds = rect;
+            //Bounds = rect;
         }
 
         protected override void Run(object args)
@@ -41,7 +41,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
             Methods.PressMouseLeft(Hwnd, Values.Scroll.X, Values.Scroll.UpY);
             while (true)
             {
-                using (Bitmap bmp = WindowImageMethods.CaptureWindow(Hwnd, bounds))
+                using (Bitmap bmp = WindowImageMethods.CaptureWindow(Hwnd, Bounds))
                 {
                     if (WindowImageMethods.CompareColors(bmp.GetPixel(548, 201), Color.FromArgb(212, 149, 27)) < MaxTolerance)
                     {

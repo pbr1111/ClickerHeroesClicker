@@ -12,46 +12,46 @@ namespace ClickerHeroesClicker.Modules.Threads
 
         public Worker(IntPtr hwnd, int periodTime)
         {
-            Hwnd = hwnd;
-            Timer = new Timer(new TimerCallback(Run));
-            PeriodTime = periodTime;
-            Running = false;
+            this.Hwnd = hwnd;
+            this.Timer = new Timer(new TimerCallback(Run));
+            this.PeriodTime = periodTime;
+            this.Running = false;
         }
 
         protected abstract void Run(object args);
 
         public bool IsRunning()
         {
-            return Running;
+            return this.Running;
         }
 
         public void ChangeRunState()
         {
-            if (!Running)
+            if (!this.Running)
             {
-                if (StartOrResume())
-                    Running = true;
+                if (this.StartOrResume())
+                    this.Running = true;
             }
             else
             {
-                if (Pause())
-                    Running = false;
+                if (this.Pause())
+                    this.Running = false;
             }
         }
 
         public void Stop()
         {
-            Timer.Dispose();
+            this.Timer.Dispose();
         }
 
         protected virtual bool StartOrResume()
         {
-            return Timer.Change(0, PeriodTime);
+            return this.Timer.Change(0, this.PeriodTime);
         }
 
         protected virtual bool Pause()
         {
-            return Timer.Change(Timeout.Infinite, Timeout.Infinite);
+            return this.Timer.Change(Timeout.Infinite, Timeout.Infinite);
         }
     }
 }

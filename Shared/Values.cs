@@ -15,6 +15,7 @@ namespace ClickerHeroesClicker.Shared
         };
 
         public static Color ClickableColor = Color.FromArgb(234, 76, 10);
+        public static Color FarmModeInactiveColor = Color.FromArgb(255, 0, 0);
 
         public static class ComboMantainer
         {
@@ -33,6 +34,12 @@ namespace ClickerHeroesClicker.Shared
             public const int X = 546;
             public const int DownY = 623;
             public const int UpY = 189;
+        }
+
+        public static class FarmMode
+        {
+            public const int X = 1115;
+            public const int Y = 250;
         }
 
         public static readonly int[] AbilitiesTimeouts =

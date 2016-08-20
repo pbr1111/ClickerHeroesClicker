@@ -9,21 +9,21 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
         public AutoClicker(IntPtr hwnd) : base(hwnd, 100)
         {
-            Intensity = IntensityLevel.Minimum;
+            this.Intensity = IntensityLevel.Minimum;
         }
 
         protected override void Run(object args)
         {
-            switch (Intensity)
+            switch (this.Intensity)
             {
                 case IntensityLevel.Minimum:
-                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(this.Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                     break;
                 case IntensityLevel.Maximum:
-                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
-                    Methods.SendMouseLeft(Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(this.Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(this.Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(this.Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
+                    Methods.SendMouseLeft(this.Hwnd, Values.ComboMantainer.X, Values.ComboMantainer.Y);
                     break;
             }
         }
@@ -35,19 +35,19 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
         public int UpIntensity()
         {
-            if (Intensity < IntensityLevel.Maximum)
+            if (this.Intensity < IntensityLevel.Maximum)
             {
-                Intensity++;
+                this.Intensity++;
             }
-            return (int)Intensity;
+            return (int)this.Intensity;
         }
         public int DownIntensity()
         {
-            if (Intensity > IntensityLevel.Minimum)
+            if (this.Intensity > IntensityLevel.Minimum)
             {
-                Intensity--;
+                this.Intensity--;
             }
-            return (int)Intensity;
+            return (int)this.Intensity;
         }
 
         public enum IntensityLevel

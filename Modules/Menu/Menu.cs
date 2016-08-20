@@ -11,7 +11,7 @@ namespace ClickerHeroesClicker.Modules.Menu
         {
             Intensity = WorkerContainer.AutoClickerThread.GetMinIntensity();
 
-            ShowOptions(Intensity);
+            Menu.ShowOptions(Intensity);
 
             ConsoleKey pressed;
             while ((pressed = Console.ReadKey(true).Key) != ConsoleKey.Escape)
@@ -33,7 +33,10 @@ namespace ClickerHeroesClicker.Modules.Menu
                     case ConsoleKey.F5:
                         WorkerContainer.AutoClickClickablesThread.ChangeRunState();
                         break;
-                    /*case ConsoleKey.F6:
+                    case ConsoleKey.F6:
+                        WorkerContainer.FarmModeThread.ChangeRunState();
+                        break;
+                    /*case ConsoleKey.F7:
                         WorkerContainer.BuyAllHeroes.ChangeRunState();
                         break;*/
                     case ConsoleKey.UpArrow:
@@ -53,12 +56,13 @@ namespace ClickerHeroesClicker.Modules.Menu
         {
             Console.Clear();
             Console.WriteLine("Opcions:");
-            Console.WriteLine("\tF1 - {0} utilitzar habilitats.", GetTextNextStateOption(WorkerContainer.AbilitiesThread.IsRunning()));
-            Console.WriteLine("\tF2 - {0} pujar heroi fixe x100.", GetTextNextStateOption(WorkerContainer.UpgradeHeroesThread.IsRunning()));
-            Console.WriteLine("\tF3 - {0} clicar als clicables.", GetTextNextStateOption(WorkerContainer.ClickClickablesThread.IsRunning()));
-            Console.WriteLine("\tF4 - {0} l'autoclicker. Nivell: {1} (amunt/avall).", GetTextNextStateOption(WorkerContainer.AutoClickerThread.IsRunning()), intensity);
-            Console.WriteLine("\tF5 - {0} clicar clicables intel·ligent.", GetTextNextStateOption(WorkerContainer.AutoClickClickablesThread.IsRunning()));
-            //Console.WriteLine("\tF6 - {0} comprar automàticament 200 de cada heroi.", GetTextNextStateOption(WorkerContainer.BuyAllHeroes.IsRunning()));
+            Console.WriteLine("\tF1 - {0} utilitzar habilitats.", Menu.GetTextNextStateOption(WorkerContainer.AbilitiesThread.IsRunning()));
+            Console.WriteLine("\tF2 - {0} pujar heroi fixe x100.", Menu.GetTextNextStateOption(WorkerContainer.UpgradeHeroesThread.IsRunning()));
+            Console.WriteLine("\tF3 - {0} clicar als clicables.", Menu.GetTextNextStateOption(WorkerContainer.ClickClickablesThread.IsRunning()));
+            Console.WriteLine("\tF4 - {0} l'autoclicker. Nivell: {1} (amunt/avall).", Menu.GetTextNextStateOption(WorkerContainer.AutoClickerThread.IsRunning()), intensity);
+            Console.WriteLine("\tF5 - {0} clicar clicables intel·ligent.", Menu.GetTextNextStateOption(WorkerContainer.AutoClickClickablesThread.IsRunning()));
+            Console.WriteLine("\tF6 - {0} matenir el mode de farm.", Menu.GetTextNextStateOption(WorkerContainer.FarmModeThread.IsRunning()));
+            //Console.WriteLine("\tF7 - {0} comprar automàticament 200 de cada heroi.", Menu.GetTextNextStateOption(WorkerContainer.BuyAllHeroes.IsRunning()));
             Console.WriteLine("ESC per sortir");
         }
 

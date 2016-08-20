@@ -14,7 +14,7 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
         {
             for (int i = 0; i < Values.Clickables.Length / 2; i++)
             {
-                Methods.SendMouseLeft(Hwnd, Values.Clickables[i, 0], Values.Clickables[i, 1]);
+                Methods.SendMouseLeft(this.Hwnd, Values.Clickables[i, 0], Values.Clickables[i, 1]);
             }
         }
     }

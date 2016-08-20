@@ -38,12 +38,12 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
         private void GoToFirstHeroe()
         {
-            Methods.PressMouseLeft(Hwnd, Values.Scroll.X, Values.Scroll.UpY);
+            Methods.PressMouseLeft(this.Hwnd, Values.Scroll.X, Values.Scroll.UpY);
             while (true)
             {
                 using (Bitmap bmp = WindowImageMethods.CaptureWindow(Hwnd, Bounds))
                 {
-                    if (WindowImageMethods.CompareColors(bmp.GetPixel(548, 201), Color.FromArgb(212, 149, 27)) < MaxTolerance)
+                    if (WindowImageMethods.CompareColors(bmp.GetPixel(548, 201), Color.FromArgb(212, 149, 27)) < BuyAllHeroes.MaxTolerance)
                     {
                         Methods.ReleaseMouseLeft(Hwnd, Values.Scroll.X, Values.Scroll.UpY);
                         break;

@@ -17,35 +17,35 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
 
         public AutoClickClickables(IntPtr hwnd) : base(hwnd, 5000)
         {
-            Found = false;
+            this.Found = false;
         }
 
         protected override bool StartOrResume()
         {
-            Rectangle windowDimensions = Win32API.GetClientRect(Hwnd);
+            Rectangle windowDimensions = Win32API.GetClientRect(this.Hwnd);
             if (windowDimensions.Width == 0)
             {
                 Console.WriteLine("La finestra no ha d'estar minimitzada. Prem una tecla per continuar.");
                 Console.ReadKey(true);
                 return false;
             }
-            Bounds = windowDimensions;
+            this.Bounds = windowDimensions;
             return base.StartOrResume();
         }
 
         protected override void Run(object args)
         {
             int clickableId = -1;
-            if ((clickableId = IsClickableVisible()) != -1)
+            if ((clickableId = this.IsClickableVisible()) != -1)
             {
-                Methods.SendMouseLeft(Hwnd, Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
+                Methods.SendMouseLeft(this.Hwnd, Values.Clickables[clickableId, 0], Values.Clickables[clickableId, 1]);
             }
         }
 
         public int IsClickableVisible()
         {
             int clickableId = -1;
-            using (Bitmap bmp = WindowImageMethods.CaptureWindow(Hwnd, Bounds))
+            using (Bitmap bmp = WindowImageMethods.CaptureWindow(this.Hwnd, this.Bounds))
             {
                 List<double> colorComparison = new List<double>();
                 for (int i = 0; i < Values.Clickables.Length / 2; i++)
@@ -56,21 +56,21 @@ namespace ClickerHeroesClicker.Modules.Threads.Workers
                             Values.ClickableColor));
                 }
                 double minValue = colorComparison.Min();
-                if (minValue < MaxTolerance)
+                if (minValue < AutoClickClickables.MaxTolerance)
                 {
-                    if (!Found)
+                    if (!this.Found)
                     {
-                        Found = true;
+                        this.Found = true;
                     }
                     else
                     {
                         clickableId = colorComparison.IndexOf(minValue);
-                        Found = false;
+                        this.Found = false;
                     }
                 }
-                else if (Found)
+                else if (this.Found)
                 {
-                    Found = false;
+                    this.Found = false;
                 }
 #if DEBUG
                 if (clickableId != -1)
